@@ -1,0 +1,5 @@
+out.trm
+*.class
+*.dep
+simple.java
+strategoxt.jar
