@@ -1,0 +1,7 @@
+To make this work:
+
+1. Grab strategoxt.jar from http://strategoxt.org/Stratego/STRJ and stick it in this directory.
+
+2. Run ./build.sh
+3. No errors = it worked!
+4. The transformed term output is in out.trm.

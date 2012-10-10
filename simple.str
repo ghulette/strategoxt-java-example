@@ -1,0 +1,25 @@
+module basic
+imports libstrategolib
+signature
+  sorts E F A
+constructors
+  gen_info               : F
+  file_info              : S * N * N -> F
+  add_op                 : E * E * A * F -> E
+  multiply_op            : E * E * A * F -> E
+  int_val                : A * F -> E
+  value_annotation       : N * F -> E
+  preprocessing_info     : S -> A
+  var_ref_exp            : A * F -> E
+  var_ref_exp_annotation : T * A * A * A * A -> A
+  binary_op_annotation   : T * A -> A
+  type_int               : T
+  default                : A
+  null                   : A
+rules
+  G : gen_info() -> file_info("compilerGenerated",0,0)
+  R1 : multiply_op(add_op(var_ref_exp(var_ref_exp_annotation(type_int,a,no_static,null,preprocessing_info([])),_),var_ref_exp(var_ref_exp_annotation(type_int,b,no_static,null,preprocessing_info([])),_),binary_op_annotation(type_int,preprocessing_info([])),_),var_ref_exp(var_ref_exp_annotation(type_int,c,no_static,null,preprocessing_info([])),_),binary_op_annotation(type_int,preprocessing_info([])),_) -> add_op(multiply_op(var_ref_exp(var_ref_exp_annotation(type_int,a,no_static,null,preprocessing_info([])),gen_info()),var_ref_exp(var_ref_exp_annotation(type_int,c,no_static,null,preprocessing_info([])),gen_info()),binary_op_annotation(type_int,preprocessing_info([])),gen_info()),multiply_op(var_ref_exp(var_ref_exp_annotation(type_int,b,no_static,null,preprocessing_info([])),gen_info()),var_ref_exp(var_ref_exp_annotation(type_int,c,no_static,null,preprocessing_info([])),gen_info()),binary_op_annotation(type_int,preprocessing_info([])),gen_info()),binary_op_annotation(type_int,preprocessing_info([])),gen_info())
+strategies
+  main = io-wrap(rewr;gen)
+  rewr = oncetd(R1)
+  gen = innermost(G)
